@@ -9,6 +9,7 @@ parameters:
     france_travail.client_secret: '%env(FRANCE_TRAVAIL_CLIENT_SECRET)%'
     france_travail.token_url: '%env(FRANCE_TRAVAIL_TOKEN_URL)%'
     france_travail.api_base_url: '%env(FRANCE_TRAVAIL_API_BASE_URL)%'
+    france_travail.scope: '%env(FRANCE_TRAVAIL_SCOPE)%'
 
 services:
     # default configuration for services in *this* file
@@ -27,6 +28,7 @@ services:
             $clientSecret: '%france_travail.client_secret%'
             $tokenUrl: '%france_travail.token_url%'
             $apiBaseUrl: '%france_travail.api_base_url%'
+            $scope: '%france_travail.scope%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
