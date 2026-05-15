@@ -11,7 +11,7 @@ Extraction d'informations de l'API France Travail [https://francetravail.io](htt
 Pour la ville d'Amiens avec un rayon de 10 kilomètres :
 
 | Critère publication                    | Source des offres                                                 | Type de contrat |
-| -------------------------------------- | ----------------------------------------------------------------- | --------------- | --------------------------------------- |
+| -------------------------------------- | ----------------------------------------------------------------- | --------------- |
 | Toutes les offres                      | Toutes sources (France Travail, jobboards, intérim, entreprises…) | Tous contrats   |
 | Toutes les offres                      | France Travail uniquement                                         | Tous contrats   |
 | Toutes les offres                      | Toutes sources                                                    | CDI uniquement  |
