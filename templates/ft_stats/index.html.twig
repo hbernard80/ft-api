@@ -16,7 +16,6 @@
                 <th>Jobs_ft_1j</th>
                 <th>Jobs_cdi</th>
                 <th>Jobs_ft_cdi</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,18 +29,13 @@
                 <td>{{ ft_stat.jobsFt1j }}</td>
                 <td>{{ ft_stat.jobsCdi }}</td>
                 <td>{{ ft_stat.jobsFtCdi }}</td>
-                <td>
-                    <a href="{{ path('app_ft_stats_show', {'id': ft_stat.id}) }}">show</a>
-                    <a href="{{ path('app_ft_stats_edit', {'id': ft_stat.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_ft_stats_new') }}">Create new</a>
 {% endblock %}

@@ -6,11 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class MainControllerTest extends WebTestCase
 {
-    public function testIndex(): void
+    public function testHomePageIsAvailable(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/main');
+        $client->request('GET', '/');
 
         self::assertResponseIsSuccessful();
+        self::assertPageTitleContains('FtStats index');
     }
 }
