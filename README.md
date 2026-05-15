@@ -38,3 +38,26 @@ Affichage sur la page d'accueil et stockage de ces statistiques par date en base
 * Configuration de variables d'environnement dans le fichier _config/services.yaml_
 * Création d'un service _src/Service/FranceTravailClientService.php_
 * Création d'une entité _src/Entity/FtStats.php_ pour le stockage des statistiques en base de données
+
+## Import quotidien des statistiques France Travail
+
+La commande Symfony suivante interroge l'API Offres d'emploi de France Travail et enregistre ou met à jour les totaux du jour pour Amiens (`commune=80021`) dans un rayon de 10 km :
+
+```bash
+php bin/console app:ft-stats:import
+```
+
+Les six indicateurs importés sont :
+
+* toutes les offres ;
+* toutes les offres publiées depuis moins de 24 heures ;
+* toutes les offres en CDI uniquement ;
+* les offres publiées par France Travail uniquement ;
+* les offres publiées par France Travail uniquement en CDI ;
+* les offres publiées par France Travail uniquement depuis moins de 24 heures.
+
+Pour une fréquence quotidienne, planifier cette commande via cron ou le planificateur de l'hébergement applicatif, par exemple :
+
+```cron
+0 6 * * * cd /chemin/vers/ft-api && php bin/console app:ft-stats:import
+```
