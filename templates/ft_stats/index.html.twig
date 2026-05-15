@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FtStats index{% endblock %}
+
+{% block body %}
+    <h1>FtStats index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Jobs</th>
+                <th>Jobs_ft</th>
+                <th>Jobs_1j</th>
+                <th>Jobs_ft_1j</th>
+                <th>Jobs_cdi</th>
+                <th>Jobs_ft_cdi</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ft_stat in ft_stats %}
+            <tr>
+                <td>{{ ft_stat.id }}</td>
+                <td>{{ ft_stat.date ? ft_stat.date|date('Y-m-d') : '' }}</td>
+                <td>{{ ft_stat.jobs }}</td>
+                <td>{{ ft_stat.jobsFt }}</td>
+                <td>{{ ft_stat.jobs1j }}</td>
+                <td>{{ ft_stat.jobsFt1j }}</td>
+                <td>{{ ft_stat.jobsCdi }}</td>
+                <td>{{ ft_stat.jobsFtCdi }}</td>
+                <td>
+                    <a href="{{ path('app_ft_stats_show', {'id': ft_stat.id}) }}">show</a>
+                    <a href="{{ path('app_ft_stats_edit', {'id': ft_stat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ft_stats_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,97 @@
+:root {
+    --color-white: #fff;
+    --color-dark: #333;
+}
+
+body {
+	background-color: var(--color-white);
+}
+
+/* Police Roboto thin 300
+* https://fonts.google.com/specimen/Roboto
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*  {
+	font-family: 'Roboto', sans-serif;
+}
+*/
+
+/* ----------------------------------------------
+* Tableaux
+* ---------------------------------------------- */
+th {
+	text-align: center; }
+
+/* hack Bootstrap pour changer la couleur de survol des lignes d'un tableau */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: #BBB;
+}
+
+/* ----------------------------------------------
+* Ombres
+* ---------------------------------------------- */
+.shadow-bottom {
+	box-shadow: 0 3px 3px 1px #CCC;
+}
+
+.shadow-top {
+  position: relative;
+}
+
+.shadow-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px; /* suffisant pour blur 3px + spread 1px */
+  box-shadow: 0 -3px 3px 1px #ccc;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------
+* Liens
+* ---------------------------------------------- */
+a.btn-theme {
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	text-decoration: none;
+}
+
+a.btn-theme:hover {
+	border: 1px solid var(--color-dark);
+}
+
+/* ----------------------------------------------
+* Pagination Bootstrap
+* ---------------------------------------------- */
+.pagination {
+    --bs-pagination-color: var(--color-dark);
+    --bs-pagination-bg: #f5f5f5;
+    --bs-pagination-border-color: #ddd;
+    --bs-pagination-hover-color: var(--color-dark);
+    --bs-pagination-hover-bg: #e0e0e0;
+    --bs-pagination-active-color: var(--color-white);
+    --bs-pagination-active-bg: var(--color-dark);
+    --bs-pagination-active-border-color: var(--color-dark);
+}
+
+.pagination .page-link {
+    transition: all 0.2s ease;
+}
+
+/* ----------------------------------------------
+* Navbar Bootstrap 
+* ---------------------------------------------- */
+
+/* Couleurs liens navbar principale */
+.navbar .nav-link:hover, .navbar .nav-link:focus {    
+    color: var(--color-white) !important;
+}
+
+/* Couleurs liens navbar principale */
+.navbar .nav-link.active {
+    color: #ddd !important;
+    font-weight: 600;
+}

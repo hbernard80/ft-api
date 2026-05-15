@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FtStats{% endblock %}
+
+{% block body %}
+    <h1>FtStats</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ft_stat.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ ft_stat.date ? ft_stat.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Jobs</th>
+                <td>{{ ft_stat.jobs }}</td>
+            </tr>
+            <tr>
+                <th>Jobs_ft</th>
+                <td>{{ ft_stat.jobsFt }}</td>
+            </tr>
+            <tr>
+                <th>Jobs_1j</th>
+                <td>{{ ft_stat.jobs1j }}</td>
+            </tr>
+            <tr>
+                <th>Jobs_ft_1j</th>
+                <td>{{ ft_stat.jobsFt1j }}</td>
+            </tr>
+            <tr>
+                <th>Jobs_cdi</th>
+                <td>{{ ft_stat.jobsCdi }}</td>
+            </tr>
+            <tr>
+                <th>Jobs_ft_cdi</th>
+                <td>{{ ft_stat.jobsFtCdi }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ft_stats_index') }}">back to list</a>
+
+    <a href="{{ path('app_ft_stats_edit', {'id': ft_stat.id}) }}">edit</a>
+
+    {{ include('ft_stats/_delete_form.html.twig') }}
+{% endblock %}

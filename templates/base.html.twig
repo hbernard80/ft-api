@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang_map[app.request.locale] ?? app.request.locale }}">
+<head>
+        <meta charset="UTF-8">
+        <title>{% block title %}FT API{% endblock %}</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="none">
+        <meta name="referrer" content="no-referrer">
+        
+        <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+        
+
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+ </head>
+<body>
+    <header class="container-fluid bg-dark mb-2 px-0 shadow-bottom">
+        <div class="container">
+            <nav class="navbar navbar-expand-md justify-content-center text-white" data-bs-theme="dark" aria-label="Menu principal" role="navigation">
+                <a class="navbar-brand" href="/"><i class="bi bi-bookmark-star-fill"></i> FT API</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-main">
+                    <ul class="navbar-nav mx-auto mb-2 mb-md-0 text-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_main') }}"><i class="bi bi-house-door" aria-hidden="true"></i> <span class="visually-hidden">Accueil</span></a>
+                        </li>						
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+     <main class="container">
+    {% block body %}
+     {% endblock %}
+    </main>
+    <footer class="container-fluid bg-dark mt-3 p-2 text-white text-center shadow-top">
+            &copy; {{ "now"|date('Y') }} Hervé BERNARD
+    </footer>        
+</body>
+</html>

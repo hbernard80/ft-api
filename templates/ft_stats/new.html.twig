@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FtStats{% endblock %}
+
+{% block body %}
+    <h1>Create new FtStats</h1>
+
+    {{ include('ft_stats/_form.html.twig') }}
+
+    <a href="{{ path('app_ft_stats_index') }}">back to list</a>
+{% endblock %}
