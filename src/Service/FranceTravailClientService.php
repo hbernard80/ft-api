@@ -15,6 +15,7 @@ class FranceTravailClientService
         private string $clientSecret,
         private string $tokenUrl,
         private string $apiBaseUrl,
+        private string $scope = '',
     ) {
     }
 
@@ -24,19 +25,30 @@ class FranceTravailClientService
             return $this->accessToken;
         }
 
+        $body = [
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ];
+
+        if ($this->scope !== '') {
+            $body['scope'] = $this->scope;
+        }
+
         $response = $this->httpClient->request('POST', $this->tokenUrl, [
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
-            'body' => [
-                'grant_type' => 'client_credentials',
-                'client_id' => $this->clientId,
-                'client_secret' => $this->clientSecret,
-                // selon l'API ciblée, un scope peut être requis
-            ],
+            'body' => http_build_query($body, '', '&', PHP_QUERY_RFC3986),
         ]);
 
-        $data = $response->toArray();
+        $data = $response->toArray(false);
+
+        if ($response->getStatusCode() >= 400) {
+            $message = $data['error_description'] ?? $data['error'] ?? 'Réponse invalide du serveur OAuth France Travail.';
+
+            throw new \RuntimeException(sprintf('Authentification France Travail impossible (%d): %s', $response->getStatusCode(), $message));
+        }
 
         if (!isset($data['access_token'])) {
             throw new \RuntimeException('Token France Travail introuvable.');

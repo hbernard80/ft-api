@@ -39,6 +39,20 @@ Affichage sur la page d'accueil et stockage de ces statistiques par date en base
 * Création d'un service _src/Service/FranceTravailClientService.php_
 * Création d'une entité _src/Entity/FtStats.php_ pour le stockage des statistiques en base de données
 
+## Configuration France Travail
+
+L'API France Travail utilise OAuth2 avec le grant `client_credentials`. Le point d'accès token attend les identifiants applicatifs et le scope de l'API ciblée dans un corps `application/x-www-form-urlencoded`. Pour l'API Offres d'emploi v2, renseigner ces variables dans _.env.local_ :
+
+```dotenv
+FRANCE_TRAVAIL_CLIENT_ID="votre_client_id"
+FRANCE_TRAVAIL_CLIENT_SECRET="votre_client_secret"
+FRANCE_TRAVAIL_TOKEN_URL="https://entreprise.francetravail.fr/connexion/oauth2/access_token?realm=/partenaire"
+FRANCE_TRAVAIL_API_BASE_URL="https://api.francetravail.io"
+FRANCE_TRAVAIL_SCOPE="api_offresdemploiv2 o2dsoffre"
+```
+
+Une erreur `HTTP/1.1 400 Bad Request` sur `/connexion/oauth2/access_token` indique généralement un scope absent ou différent de celui associé à l'application sur francetravail.io, ou des identifiants invalides. Vérifier la valeur exacte du scope dans l'espace France Travail IO si l'erreur persiste.
+
 ## Import quotidien des statistiques France Travail
 
 La commande Symfony suivante interroge l'API Offres d'emploi de France Travail et enregistre ou met à jour les totaux du jour pour Amiens (`commune=80021`) dans un rayon de 10 km :
