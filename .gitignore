@@ -18,3 +18,10 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+
+###> Perso ###
+/templates/ft_stats/
+!/templates/ft_stats/index.html.twig
+###< perso ###
+
