@@ -12,6 +12,7 @@ class FtStatsImporter
     private const AMIENS_RADIUS_KM = 10;
     private const CDI_CONTRACT_CODE = 'CDI';
     private const FRANCE_TRAVAIL_ORIGIN_CODE = '1';
+    private const PUBLISHED_SINCE_ONE_DAY = 1;
 
     public function __construct(
         private readonly FranceTravailClientService $franceTravailClient,
@@ -24,16 +25,14 @@ class FtStatsImporter
     {
         $referenceDate ??= new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
         $date = \DateTime::createFromImmutable($referenceDate)->setTime(0, 0);
-        $sinceYesterday = $referenceDate->sub(new \DateInterval('P1D'));
-
         $stat = $this->ftStatsRepository->findOneBy(['date' => $date]) ?? new FtStats();
         $stat->setDate($date)
             ->setJobs($this->countOffers())
-            ->setJobs1j($this->countOffers($this->publishedSince($sinceYesterday, $referenceDate)))
+            ->setJobs1j($this->countOffers($this->publishedSinceOneDay()))
             ->setJobsCdi($this->countOffers($this->cdiOnly()))
             ->setJobsFt($this->countOffers($this->franceTravailOnly()))
             ->setJobsFtCdi($this->countOffers($this->franceTravailOnly() + $this->cdiOnly()))
-            ->setJobsFt1j($this->countOffers($this->franceTravailOnly() + $this->publishedSince($sinceYesterday, $referenceDate)));
+            ->setJobsFt1j($this->countOffers($this->franceTravailOnly() + $this->publishedSinceOneDay()));
 
         $this->entityManager->persist($stat);
         $this->entityManager->flush();
@@ -83,11 +82,10 @@ class FtStatsImporter
     /**
      * @return array<string, scalar>
      */
-    private function publishedSince(\DateTimeImmutable $minCreationDate, \DateTimeImmutable $maxCreationDate): array
+    private function publishedSinceOneDay(): array
     {
         return [
-            'minCreationDate' => $minCreationDate->format(\DateTimeInterface::ATOM),
-            'maxCreationDate' => $maxCreationDate->format(\DateTimeInterface::ATOM),
+            'publieeDepuis' => self::PUBLISHED_SINCE_ONE_DAY,
         ];
     }
 }

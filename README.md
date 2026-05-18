@@ -64,11 +64,14 @@ php bin/console app:ft-stats:import
 Les six indicateurs importés sont :
 
 * toutes les offres ;
-* toutes les offres publiées depuis moins de 24 heures ;
+* toutes les offres publiées depuis moins d'un jour (`publieeDepuis=1`) ;
 * toutes les offres en CDI uniquement ;
 * les offres publiées par France Travail uniquement ;
 * les offres publiées par France Travail uniquement en CDI ;
-* les offres publiées par France Travail uniquement depuis moins de 24 heures.
+* les offres publiées par France Travail uniquement depuis moins d'un jour (`publieeDepuis=1`).
+
+> [!NOTE]
+> Le total `Toutes sources` de l'API peut être inférieur au total affiché sur francetravail.fr : certaines offres partenaires visibles sur le site ne sont pas forcément diffusables via l'API, selon l'accord de diffusion donné par le partenaire.
 
 Pour une fréquence quotidienne, planifier cette commande via cron ou le planificateur de l'hébergement applicatif, par exemple :
 
