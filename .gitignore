@@ -21,6 +21,7 @@
 
 
 ###> Perso ###
+/00-DOC/
 /templates/ft_stats/
 !/templates/ft_stats/index.html.twig
 ###< perso ###

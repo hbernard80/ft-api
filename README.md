@@ -58,7 +58,7 @@ Une erreur `HTTP/1.1 400 Bad Request` sur `/connexion/oauth2/access_token` indiq
 La commande Symfony suivante interroge l'API Offres d'emploi de France Travail et enregistre ou met à jour les totaux du jour pour Amiens (`commune=80021`) dans un rayon de 10 km :
 
 ```bash
-php bin/console app:ft-stats:import
+symfony console app:ft-stats:import
 ```
 
 Les six indicateurs importés sont :
@@ -70,8 +70,7 @@ Les six indicateurs importés sont :
 * les offres publiées par France Travail uniquement en CDI ;
 * les offres publiées par France Travail uniquement depuis moins d'un jour (`publieeDepuis=1`).
 
-> [!NOTE]
-> Le total `Toutes sources` de l'API peut être inférieur au total affiché sur francetravail.fr : certaines offres partenaires visibles sur le site ne sont pas forcément diffusables via l'API, selon l'accord de diffusion donné par le partenaire.
+> ⚠️ Le total `Toutes sources` de l'API peut être inférieur à celui affiché sur le site francetravail.fr car certaines offres partenaires visibles sur le site ne sont pas forcément diffusables via l'API, selon l'accord de diffusion donné par le partenaire.
 
 Pour une fréquence quotidienne, planifier cette commande via cron ou le planificateur de l'hébergement applicatif, par exemple :
 
