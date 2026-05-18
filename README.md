@@ -21,6 +21,11 @@ Pour la ville d'Amiens avec un rayon de 10 kilomètres :
 
 Affichage sur la page d'accueil et stockage de ces statistiques par date en base de données (seuls les totaux sont conservés, aucune information de contenu des offres d'emploi).
 
+## Aperçu
+
+![screenshot.png](screenshot.png)
+
+
 ## Stack technique
 
 * Symfony 7.4 <abbr title="Long-Term Support">LTS</abbr> (webapp)
