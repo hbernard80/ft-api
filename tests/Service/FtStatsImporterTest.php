@@ -51,22 +51,11 @@ final class FtStatsImporterTest extends KernelTestCase
 
         self::assertSame([
             ['commune' => '80021', 'rayon' => 10],
-            [
-                'commune' => '80021',
-                'rayon' => 10,
-                'minCreationDate' => '2026-05-14T12:00:00+00:00',
-                'maxCreationDate' => '2026-05-15T12:00:00+00:00',
-            ],
+            ['commune' => '80021', 'rayon' => 10, 'publieeDepuis' => 1],
             ['commune' => '80021', 'rayon' => 10, 'typeContrat' => 'CDI'],
             ['commune' => '80021', 'rayon' => 10, 'origineOffre' => '1'],
             ['commune' => '80021', 'rayon' => 10, 'origineOffre' => '1', 'typeContrat' => 'CDI'],
-            [
-                'commune' => '80021',
-                'rayon' => 10,
-                'origineOffre' => '1',
-                'minCreationDate' => '2026-05-14T12:00:00+00:00',
-                'maxCreationDate' => '2026-05-15T12:00:00+00:00',
-            ],
+            ['commune' => '80021', 'rayon' => 10, 'origineOffre' => '1', 'publieeDepuis' => 1],
         ], $capturedQueries);
 
         self::assertNotNull($repository->findOneBy(['date' => new \DateTime('2026-05-15')]));
