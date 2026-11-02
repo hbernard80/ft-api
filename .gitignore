@@ -1,0 +1,43 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+
+# Symfony Secrets - ajouté automatiquement :
+/config/secrets/prod/prod.decrypt.private.php
+
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
+
+
+###> Perso ###
+/00-DOC/
+/templates/ft_stats/*
+!/templates/ft_stats/index.html.twig
+
+## Secrets - paramétrage dans le cadre d'un projet de démo et en solo :
+# On ignore totu le répertoire des secrets
+/config/secrets/*
+
+# Si projet réel, décommenter cette ligne et supprimer la précédente :
+# /config/secrets/*/*.decrypt.private.php
+
+###< perso ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###

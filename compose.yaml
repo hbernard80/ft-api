@@ -1,0 +1,56 @@
+services:
+  php:
+    build:
+      context: ./docker/php
+    environment:
+      APP_ENV: dev
+      APP_SECRET: ${APP_SECRET:-docker-local-secret}
+      DATABASE_URL: "mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-sf74_ftapi}?serverVersion=26.10.0&charset=utf8mb4"
+      MAILER_DSN: smtp://mailer:1025
+    volumes:
+      - .:/var/www/html
+      - php_vendor:/var/www/html/vendor
+      - php_var:/var/www/html/var
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:80"
+
+###> doctrine/doctrine-bundle ###
+  database:
+    image: mysql:26.10
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-sf74_ftapi}
+      # You should definitely change the password in production
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-!ChangeMe!}
+      MYSQL_USER: ${MYSQL_USER:-app}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - database_mysql_26_data:/var/lib/mysql:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose data!
+      # - ./docker/db/data:/var/lib/mysql:rw
+###< doctrine/doctrine-bundle ###
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.3-apache
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${PHPMYADMIN_PORT:-8081}:80"
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_mysql_26_data:
+###< doctrine/doctrine-bundle ###
+  php_vendor:
+  php_var:
